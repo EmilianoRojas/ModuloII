@@ -1,5 +1,4 @@
 CREATE DATABASE [IF NOT EXISTS] gastosapp
-
 USE gastosapp
 
 CREATE TABLE User (
@@ -21,6 +20,7 @@ CREATE TABLE Transaction (
     "ID_category" int(11) NOT NULL,
     "description" varchar(255) NOT NULL,
     "amount" int(11) NOT NULL,
+    "DateOfAddmission" datetime DEFAULT current_timestamp(),
     PRIMARY KEY ("ID"),
     FOREIGN KEY ("ID_user") REFERENCES "User" ("ID"),
     FOREIGN KEY ("ID_category") REFERENCES "Category" ("ID")
