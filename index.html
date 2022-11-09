@@ -6,7 +6,8 @@
     <title>Gastos App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d5b724907f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
   </head>
 
 <body>
@@ -44,7 +45,7 @@
     <div class="card text-center">
       <div class="card-body">
         <h5 class="">Total:</h5>
-        <p>$109,00</p>
+        <p id="total"></p>
         <canvas id="myChart" width="300" height="200"></canvas>
       </div>
     </div>
@@ -98,9 +99,9 @@
     <div class="container mb-5">
 
       <div class="card mt-2 w-50 mx-auto">
-          <div class="card-body">
-              <ul class="list-group">
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="card-body" id="gastos">
+              <ul class="list-group" id="lista">
+                  <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
                     Repuestos corolla
                     <span class="badge bg-danger">$75</span>
                   </li>
@@ -111,14 +112,14 @@
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     Farmatodo
                     <span class="badge bg-success">$15</span>
-                  </li>
+                  </li> -->
                 </ul>
           </div>
         </div>
     </div>
 </div>
 <!-- END HOME -->
-    <footer class=" text-center text-white fixed-bottom" style="background-color: #a7d9c1;">
+    <footer class=" text-center text-white static-bottom" style="background-color: #a7d9c1;">
         <!-- Grid container -->
         <div class="container p-4 pb-0">
           <!-- Section: Social media -->
