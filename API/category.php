@@ -5,14 +5,28 @@ include "utils.php";
 
 $dbConn =  connect($db);
 
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+    header('Access-Control-Allow-Headers: token, Content-Type');
+    header('Access-Control-Max-Age: 1728000');
+    header('Content-Length: 0');
+    header('Content-Type: application/json');
+    die();
+  }
+  
+  header('Access-Control-Allow-Origin: *');
+  header('Content-Type: application/json');
+  
+
 /*
-  listar todos los posts o solo uno
+  listar todas las castegorias o solo una categoria
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET')
 {
     if (isset($_GET['id']))
     {
-      //Mostrar un post
+      //Mostrar una categoria
       $sql = $dbConn->prepare("SELECT * FROM Category where id=:id");
       $sql->bindValue(':id', $_GET['id']);
       $sql->execute();
@@ -21,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
       exit();
 	  }
     else {
-      //Mostrar lista de post
+      //Mostrar lista de categorias
       $sql = $dbConn->prepare("SELECT * FROM Category");
       $sql->execute();
       $sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -31,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET')
 	}
 }
 
-// Crear un nuevo post
+// Crear una nueva categoria
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $input = $_POST;

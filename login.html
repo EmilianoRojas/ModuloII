@@ -6,7 +6,11 @@
     <title>Gastos App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d5b724907f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <script
+    src="https://code.jquery.com/jquery-3.6.1.js"
+    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"
+    ></script>
   </head>
 
 <body>
@@ -57,7 +61,7 @@
   <!-- Pills content -->
   <div class="tab-content">
     <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-      <form>
+      <form id="loginForm">
         <div class="text-center mb-3">
           <p>Inicie Sesion con:</p>
           <button type="button" class="btn btn-success btn-floating mx-1">
@@ -81,13 +85,13 @@
   
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="email" id="loginName" class="form-control" />
+          <input type="text" id="loginName" name="name" class="form-control" />
           <label class="form-label" for="loginName">Email o usuario</label>
         </div>
   
         <!-- Password input -->
         <div class="form-outline mb-4">
-          <input type="password" id="loginPassword" class="form-control" />
+          <input type="password" id="loginPassword" name="password" class="form-control" />
           <label class="form-label" for="loginPassword">Contraseña</label>
         </div>
   
@@ -108,7 +112,7 @@
         </div>
   
         <!-- Submit button -->
-        <button type="submit" class="btn btn-success btn-block mb-4">Enviar</button>
+        <button id="benjaminButton" type="submit" class="btn btn-success btn-block mb-4">Enviar</button>
   
         <!-- Register buttons -->
         <div class="text-center">
@@ -187,7 +191,7 @@
 </div>
 
 <!-- END HOME -->
-    <footer class=" text-center text-white fixed-bottom" style="background-color: #a7d9c1;">
+    <footer class=" text-center text-white static-bottom" style="background-color: #a7d9c1;">
         <!-- Grid container -->
         <div class="container p-4 pb-0">
           <!-- Section: Social media -->
@@ -254,37 +258,33 @@
           <a class="text-white" href="#!">Emiliano Rojas</a>
         </div>
       </footer>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
       <script>
-        var ctx = document.getElementById("myChart");
-        var myChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: {
-            labels: ['Comida', 'Arriendo', 'Gastos'],
-            datasets: [{
-              label: '# of Tomatoes',
-              data: [80, 20 , 0],
-              backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
-              ],
-              borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-              ],
-              borderWidth: 1,
-              hoverOffset: 4
-            }]
-          },
-            options: {
-              //cutoutPercentage: 40,
-              responsive: false,
-
+     $("#loginForm").submit(function() {
+      return false;
+     })    
+      $("#benjaminButton").click(function() {
+        let loginForm = $("#loginForm").serialize();        
+        $.ajax({
+          type: "GET",
+          url: "http://localhost/src/user.php",
+          contentType: "application/json",
+          async: true,
+          data: loginForm,
+          success: function (data) {
+            console.log(data);
+            if(data == false){
+              alert('merwe')
+            }else{
+              $("body").load("index.html")
+              console.log('ok pasa tkm');
             }
-          });
+          },
+          error: function (error) {
+            console.log(error);
+          },
+        })
+      });  
       </script>
       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
